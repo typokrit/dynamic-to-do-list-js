@@ -20,8 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
-    function addTask(taskText, save = true) {
-        if (taskText.trim() === "") {
+    function addTask(taskTextParam, save = true) {
+        // If taskTextParam is undefined (i.e. called from button/input), get input and trim it
+        const taskText = taskTextParam !== undefined ? taskTextParam : taskInput.value.trim();
+
+        if (taskText === "") {
             alert('Please enter a task');
             return;
         }
@@ -45,16 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
             saveTasks();
         }
 
-        taskInput.value = '';
+        if (taskTextParam === undefined) {
+            taskInput.value = '';
+        }
     }
 
     addButton.addEventListener('click', () => {
-        addTask(taskInput.value);
+        addTask();
     });
 
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            addTask(taskInput.value);
+            addTask();
         }
     });
 
