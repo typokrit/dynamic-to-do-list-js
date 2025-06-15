@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create list item for the task
         const li = document.createElement('li');
-        li.textContent = taskText;
+        // Append task text as a text node to preserve children
+        li.appendChild(document.createTextNode(taskText));
 
         // Create remove button for the task
         const removeBtn = document.createElement('button');
@@ -50,3 +51,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
